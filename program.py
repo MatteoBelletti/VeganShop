@@ -124,7 +124,7 @@ class Program:
             sys.exit(0)
         else:
             print("Comando non valido")
-            print("I comandi disponibili sono i seguenti")
+            print("I comandi disponibili sono i seguenti:")
             help_command()
 
     def start(self):
@@ -137,33 +137,40 @@ class Program:
 
     def record_sale(self):
         """
-        Registra una vendita.
+        Registra una serie di vendite.
         """
-        try:
-            product_name = read_str("Nome del prodotto: ")
-            product_quantity = read_int("Quantità: ")
-            product_in_warehouse = self.warehouse_obj.get_product(product_name)
-            if product_in_warehouse is None:
-                print("Prodotto non in magazzino - ridigitare")
-                self.record_sale()
-                return
-            else:
-                sales_data = self.warehouse_obj.record_sales(product_name, product_quantity)
-                print("VENDITA REGISTRATA")
-                print(f"{sales_data[1]} X {sales_data[0]}:€ {sales_data[2]}")
-                print(f"Totale:€ {sales_data[3]}")
+        sale_complete = False
+        sales_data = list()
+        sales_total = 0
+        while True:
+            try:
+                product_name = read_str("Nome del prodotto: ")
+                product_quantity = read_int("Quantità: ")
+                product_in_warehouse = self.warehouse_obj.get_product(product_name)
+                if product_in_warehouse is None:
+                    print("Prodotto non in magazzino - ridigitare")
+                    continue
+                else:
+                    sale_data = self.warehouse_obj.record_sales(product_name, product_quantity)
+                    sale_complete = True
+                    sales_data.append(sale_data)
+                    sales_total += sale_data[3]
 
-            if another_time():
-                self.record_sale()
-            else:
-                return
-        except Exception as ex:
-            print("Eccezione!")
-            print(ex.args)
-            if another_time():
-                self.record_sale()
-            else:
-                return
+                if not another_time():
+                    break
+
+            except Exception as ex:
+                print("Eccezione!")
+                print(ex.args)
+                if not another_time():
+                    break
+
+        if sale_complete:
+            print("VENDITA REGISTRATA")
+            for i in sales_data:
+                print(f"{i[1]} X {i[0]}:€ {i[2]}")
+
+            print(f"Totale:€ {sales_total}")
 
     def list_warehouse_products(self):
         """
