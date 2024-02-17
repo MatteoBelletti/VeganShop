@@ -1,0 +1,37 @@
+[
+      {
+            "name": "Test",
+            "purchase_price": 1.5,
+            "sale_price": 2.0,
+            "quantity": 4,
+            "sales": 1
+      },
+      {
+            "name": "tofu",
+            "purchase_price": 2.0,
+            "sale_price": 7.0,
+            "quantity": 10,
+            "sales": 0
+      },
+      {
+            "name": "banane",
+            "purchase_price": 1.0,
+            "sale_price": 2.3,
+            "quantity": 0,
+            "sales": 102
+      },
+      {
+            "name": "birra",
+            "purchase_price": 1.02,
+            "sale_price": 2.3,
+            "quantity": 1000,
+            "sales": 0
+      },
+      {
+            "name": "bistecca di cocco",
+            "purchase_price": 4.0,
+            "sale_price": 6.66,
+            "quantity": 42,
+            "sales": 0
+      }
+]
