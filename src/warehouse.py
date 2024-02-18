@@ -63,14 +63,14 @@ class Warehouse:
             tuple: Una tupla contenente il valore totale delle vendite e il valore totale dei profitti.
         """
         total_sales_value = 0
-        total_profits_value = 0
+        total_product_cost = 0
         for i in self.products:
             if isinstance(i, Product):
                 if i.sales > 0:
                     total_sales_value += i.sales * i.sale_price
-                    total_profits_value += i.sales * (i.sale_price - i.purchase_price)
+                    total_product_cost += i.quantity * i.purchase_price
 
-        return total_sales_value, total_profits_value
+        return total_sales_value, total_sales_value - total_product_cost
 
     def record_sales(self, product_name: str, sales_quantity: int) -> tuple:
         """
